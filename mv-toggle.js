@@ -6,6 +6,9 @@ export class MvToggle extends LitElement {
       checked: { type: Boolean, attribute: true },
       disabled: { type: Boolean, attribute: true },
       label: { type: String, attribute: true },
+
+      //  valid size values are: "medium", "small", "tiny"
+      //    default: "large"
       size: { type: String, attribute: true },
       value: { type: Object, attribute: true }
     };
@@ -15,14 +18,17 @@ export class MvToggle extends LitElement {
     return css`
       :host {
 				font-family: var(--font-family, Arial);
-				font-size: var(--font-size-m, 10pt);				
+				font-size: var(--font-size-m, 10pt);
+				--toggle-width: var(--mv-toggle-custom-size, 100px);
+				--toggle-height: calc(var(--mv-toggle-custom-size, 100px) / 2);
+				--slider-size: calc((var(--mv-toggle-custom-size, 100px) / 2) - 2px);
       }
       
       .toggle {
         position: relative;
         display: inline-block;
-        width: var(--mv-toggle-width, 100px);
-        height: var(--mv-toggle-height, 50px);
+        width: var(--toggle-width);
+        height: var(--toggle-height);
       }
       
       .toggle.medium {
@@ -104,8 +110,8 @@ export class MvToggle extends LitElement {
       .slider::before {
         position: absolute;
         content: "";
-        height: var(--mv-slider-size, 48px);
-        width: var(--mv-slider-size, 48px);
+        height: var(--slider-size);
+        width: var(--slider-size);
         left: 2px;
         bottom: 1px;
         background-color: var(--mv-slider-color, #3F4753);
@@ -122,9 +128,9 @@ export class MvToggle extends LitElement {
       }
       
       input:checked + .slider::before {
-        -webkit-transform: translateX(var(--mv-slider-size, 48px));
-        -ms-transform: translateX(var(--mv-slider-size, 48px));
-        transform: translateX(var(--mv-slider-size, 48px));
+        -webkit-transform: translateX(var(--slider-size));
+        -ms-transform: translateX(var(--slider-size));
+        transform: translateX(var(--slider-size));
       }
       
       /* Rounded sliders */
@@ -143,7 +149,7 @@ export class MvToggle extends LitElement {
       
       label {
         display: inline-block;
-        line-height: var(--mv-toggle-height, 50px);
+        line-height: var(--toggle-height);
       }
       
       label.medium {

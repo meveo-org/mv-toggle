@@ -4,7 +4,6 @@ import './mv-toggle.js';
 export class MvToggleDemo extends LitElement {
 
   static get styles() {
-    const size = 80;
     return css`
       :host {
         font-family: var(--font-family, Arial);
@@ -29,12 +28,10 @@ export class MvToggleDemo extends LitElement {
       }
       
       .custom-size {
-        --mv-toggle-width: ${unsafeCSS(size)}px;
-        --mv-toggle-height: ${unsafeCSS(size/2)}px;
-        --mv-slider-size: ${unsafeCSS((size/2)-2)}px;
+        --mv-toggle-custom-size: 80px;
       }
       
-      .container_demo {
+      .container-demo {
         display: flex;
         align-items: center;
         justify-content: center;        
@@ -144,7 +141,7 @@ export class MvToggleDemo extends LitElement {
         </div>
       </div>
       
-      <div class="container_demo">
+      <div class="container-demo">
          <mv-toggle
            .value="${{ isChecked: !this.checked }}"
            .checked="${!!this.checked}"
