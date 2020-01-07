@@ -17,18 +17,21 @@ export class MvToggle extends LitElement {
   static get styles() {
     return css`
       :host {
-				font-family: var(--font-family, Arial);
-				font-size: var(--font-size-m, 10pt);
-				--toggle-width: var(--mv-toggle-custom-size, 100px);
-				--toggle-height: calc(var(--mv-toggle-custom-size, 100px) / 2);
-				--slider-size: calc((var(--mv-toggle-custom-size, 100px) / 2) - 2px);
+	    --mv-toggle-label-font-family: var(--font-family, Arial);
+	    --mv-toggle-label-font-size: var(--font-size-m, 10pt);
+	    --width: var(--mv-toggle-custom-size, 100px);
+		--height: calc(var(--width) / 2);
+		--slider-size: calc((var(--width) / 2) - 2px);
+		--not-checked-input-color: var(--mv-toggle-not-checked, #CCCCCC);
+		--checked-input-color: var(--mv-toggle-checked, #48c9c4);
+		--slider-color: var(--mv-slider-color, #3F4753);
       }
       
       .toggle {
         position: relative;
         display: inline-block;
-        width: var(--toggle-width);
-        height: var(--toggle-height);
+        width: var(--width);
+        height: var(--height);
       }
       
       .toggle.medium {
@@ -92,7 +95,7 @@ export class MvToggle extends LitElement {
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: var(--mv-toggle-not-checked, #CCCCCC);
+        background-color: var(--not-checked-input-color);
         -webkit-transition: .4s;
         transition: .4s;
       }
@@ -114,13 +117,13 @@ export class MvToggle extends LitElement {
         width: var(--slider-size);
         left: 2px;
         bottom: 1px;
-        background-color: var(--mv-slider-color, #3F4753);
+        background-color: var(--slider-color);
         -webkit-transition: .4s;
         transition: .4s;
       }
       
       input:checked + .slider {
-        background-color: var(--mv-toggle-checked, #48c9c4);
+        background-color: var(--checked-input-color);
       }
       
       input:focus + .slider {
@@ -145,11 +148,13 @@ export class MvToggle extends LitElement {
       .toggle-label {
         margin-left: 10px;
         cursor: pointer;
+        font-family: var(--mv-toggle-label-font-family);
+        font-size: var(--mv-toggle-label-font-size);
       }
       
       label {
         display: inline-block;
-        line-height: var(--toggle-height);
+        line-height: var(--height);
       }
       
       label.medium {
