@@ -20,7 +20,8 @@ default value: large
 ```html
 <mv-toggle
   .value="${{ isChecked: !this.checked }}"  // value to be passed into click-toggle event
-  .checked="${!!this.checked}"              // boolean value to set whether toggle is on or off
+  .checked="${this.checked}"                // boolean value to set whether toggle is on or off
+  .disabled="${this.disabled}"              // boolean value to set whether the toggle is disabled or not
   @click-toggle="${this.handleClickToggle}" // custom event dispatched when the toggle is clicked
   .label="${this.label}"                    // the label shown beside the toggle button
   size="large"                              // the size of the toggle button
