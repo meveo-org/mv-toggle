@@ -1,8 +1,7 @@
-import { LitElement, html, css, unsafeCSS } from 'lit-element';
-import './mv-toggle.js';
+import { LitElement, html, css, unsafeCSS } from "lit-element";
+import "./mv-toggle.js";
 
 export class MvToggleDemo extends LitElement {
-
   static get styles() {
     return css`
       :host {
@@ -161,4 +160,4 @@ export class MvToggleDemo extends LitElement {
   }
 }
 
-customElements.define('mv-toggle-demo', MvToggleDemo);
+customElements.define("mv-toggle-demo", MvToggleDemo);

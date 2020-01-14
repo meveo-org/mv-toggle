@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit-element';
+import { LitElement, html, css } from "lit-element";
 
 export class MvToggle extends LitElement {
   static get properties() {
@@ -7,8 +7,8 @@ export class MvToggle extends LitElement {
       disabled: { type: Boolean, attribute: true },
       label: { type: String, attribute: true },
 
-      //  valid size values are: "medium", "small", "tiny"
-      //    default: "large"
+      //  valid size values are: "large", "medium", "small", "tiny"
+      //  default: "large"
       size: { type: String, attribute: true },
       value: { type: Object, attribute: true }
     };
@@ -20,11 +20,11 @@ export class MvToggle extends LitElement {
 	    --mv-toggle-label-font-family: var(--font-family, Arial);
 	    --mv-toggle-label-font-size: var(--font-size-m, 10pt);
 	    --width: var(--mv-toggle-custom-size, 100px);
-		--height: calc(var(--width) / 2);
-		--slider-size: calc((var(--width) / 2) - 2px);
-		--not-checked-input-color: var(--mv-toggle-not-checked, #CCCCCC);
-		--checked-input-color: var(--mv-toggle-checked, #48c9c4);
-		--slider-color: var(--mv-slider-color, #3F4753);
+      --height: calc(var(--width) / 2);
+      --slider-size: calc((var(--width) / 2) - 2px);
+      --not-checked-input-color: var(--mv-toggle-not-checked, #CCCCCC);
+      --checked-input-color: var(--mv-toggle-checked, #48c9c4);
+      --slider-color: var(--mv-slider-color, #3F4753);
       }
       
       .toggle {
@@ -210,4 +210,4 @@ export class MvToggle extends LitElement {
   }
 }
 
-customElements.define('mv-toggle', MvToggle);
+customElements.define("mv-toggle", MvToggle);
