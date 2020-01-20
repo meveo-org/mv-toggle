@@ -1,7 +1,18 @@
-import { LitElement, html, css, unsafeCSS } from "lit-element";
+import { LitElement, html, css } from "lit-element";
 import "./mv-toggle.js";
+import "mv-font-awesome";
 
 export class MvToggleDemo extends LitElement {
+  static get properties() {
+    return {
+      checked: { type: Boolean, attribute: false, reflect: true },
+      disabled: { type: Boolean },
+      label: { type: String },
+      value: { type: String, attribute: false, reflect: true },
+      open: { type: String, attribute: true }
+    };
+  }
+
   static get styles() {
     return css`
       :host {
@@ -50,16 +61,18 @@ export class MvToggleDemo extends LitElement {
         color: #088A29;
         background-color: #CEF6CE;
       }
+      
+      mv-fa[icon="lightbulb"] {
+        font-size: 50px;
+        cursor: pointer;
+        padding: 20px;
+      }
+      
+      .theme {
+        display: flex;
+        justify-content: flex-start;
+      }
    `;
-  }
-
-  static get properties() {
-    return {
-      checked: { type: Boolean, attribute: false, reflect: true },
-      disabled: { type: Boolean },
-      label: { type: String },
-      value: { type: String, attribute: false, reflect: true }
-    };
   }
 
   constructor() {
@@ -68,14 +81,21 @@ export class MvToggleDemo extends LitElement {
     this.disabled = true;
     this.label = "Click toggle";
     this.value = "NO";
+    this.open = false;
   }
 
   render() {
+    const light =
+        "--not-checked-input-color: #CCCCCC;" +
+        "--checked-input-color: #2196F3;" +
+        "--slider-color: #FFFFFF;";
     return html`
+      <div class="theme"><mv-fa icon="lightbulb" style="color: ${this.open ? "yellow" : ""}" @click=${this.toggleLightBulb}></mv-fa></div>
       <div class="container">
         <div class="toggle-item">
           <mv-toggle
             size="large"
+            style="${this.open ? light : ""}"
           ></mv-toggle>
           <h3>Large</h3>
         </div>
@@ -84,6 +104,7 @@ export class MvToggleDemo extends LitElement {
           <mv-toggle
             ?checked="${true}"
             size="medium"
+            style="${this.open ? light : ""}"
           ></mv-toggle>
           <h3>Medium</h3>
         </div>
@@ -92,6 +113,7 @@ export class MvToggleDemo extends LitElement {
           <mv-toggle
             ?checked="${false}"
             size="small"
+            style="${this.open ? light : ""}"
           ></mv-toggle>
           <h3>Small</h3>
         </div>
@@ -100,6 +122,7 @@ export class MvToggleDemo extends LitElement {
           <mv-toggle
             ?checked="${false}"
             size="tiny"
+            style="${this.open ? light : ""}"
           ></mv-toggle>
           <h3>Tiny</h3>
         </div>
@@ -118,6 +141,7 @@ export class MvToggleDemo extends LitElement {
             ?checked="${false}"
             size="small"
             .label="${this.label}"
+            style="${this.open ? light : ""}"
           ></mv-toggle>
           <h3>Toggle with label</h3>
         </div>
@@ -135,6 +159,7 @@ export class MvToggleDemo extends LitElement {
         <div class="toggle-item">
           <mv-toggle
             class="custom-size"
+            style="${this.open ? light : ""}"
           ></mv-toggle>
           <h3>Custom size</h3>
         </div>
@@ -147,6 +172,7 @@ export class MvToggleDemo extends LitElement {
            @click-toggle="${this.handleClickToggle}"
            .label="${this.label}"
            size="large"
+           style="${this.open ? light : ""}"
          ></mv-toggle>
          <div class="value${this.checked ? " checked" : ""}">${this.value}</div>
       </div>
@@ -158,6 +184,10 @@ export class MvToggleDemo extends LitElement {
     this.value = value.isChecked ? "YES" : "NO";
     this.checked = checked;
   }
+
+  toggleLightBulb = () => {
+    this.open = !this.open;
+  };
 }
 
 customElements.define("mv-toggle-demo", MvToggleDemo);
