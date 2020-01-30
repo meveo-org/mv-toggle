@@ -10,7 +10,11 @@ export class MvToggle extends LitElement {
       //  valid size values are: "large", "medium", "small", "tiny"
       //  default: "large"
       size: { type: String, attribute: true },
-      value: { type: Object, attribute: true }
+      value: { type: Object, attribute: true },
+
+      //  valid theme values are: "light", "dark"
+      //    default: "dark"
+      theme: { type: String, attribute: true }
     };
   }
 
@@ -20,11 +24,14 @@ export class MvToggle extends LitElement {
 	    --mv-toggle-label-font-family: var(--font-family, Arial);
 	    --mv-toggle-label-font-size: var(--font-size-m, 10pt);
 	    --width: var(--mv-toggle-custom-size, 100px);
-      --height: calc(var(--width) / 2);
-      --slider-size: calc((var(--width) / 2) - 2px);
-      --not-checked-input-color: var(--mv-toggle-not-checked, #CCCCCC);
-      --checked-input-color: var(--mv-toggle-checked, #48c9c4);
-      --slider-color: var(--mv-slider-color, #3F4753);
+        --height: calc(var(--width) / 2);
+        --slider-size: calc((var(--width) / 2) - 2px);
+        --not-checked-input-dark-background: var(--mv-toggle-not-checked-dark-background, #CCCCCC);
+        --checked-input-dark-background: var(--mv-toggle-checked-dark-background, #48c9c4);
+        --slider-dark-background: var(--mv-toggle-slider-dark-background, #3F4753);
+        --not-checked-input-light-background: var(--mv-toggle-not-checked-light-background, #CCCCCC);
+        --checked-input-light-background: var(--mv-toggle-checked-light-background, #2196F3);
+        --slider-light-background: var(--mv-toggle-slider-light-background, #FFFFFF);
       }
       
       .toggle {
@@ -168,6 +175,18 @@ export class MvToggle extends LitElement {
       label.tiny {
         line-height: 10px;
       }
+      
+      .light {
+        --not-checked-input-color: var(--not-checked-input-light-background);
+        --checked-input-color: var(--checked-input-light-background);
+        --slider-color: var(--slider-light-background);
+      }
+      
+      .dark {
+        --not-checked-input-color: var(--not-checked-input-dark-background);
+        --checked-input-color: var(--checked-input-dark-background);
+        --slider-color: var(--slider-dark-background);
+      }
    `;
   }
 
@@ -177,18 +196,19 @@ export class MvToggle extends LitElement {
     this.disabled = false;
     this.label = null;
     this.size = "large";
+    this.theme = "dark";
   }
 
   render() {
     const { handleClick, label } = this;
     return html`
-      <label class="${this.size}">
+      <label class="${this.size} ${this.theme}">
         <span class="toggle ${this.size}">
           <input
-           type="checkbox"
-           @click="${handleClick}"
-           ?disabled="${this.disabled}"
-           ?checked="${this.checked}"
+            type="checkbox"
+            @click="${handleClick}"
+            ?disabled="${this.disabled}"
+            ?checked="${this.checked}"
           />
           <span class="slider round"></span>
         </span>
@@ -196,7 +216,7 @@ export class MvToggle extends LitElement {
           ? html`<span class="toggle-label">${this.label}</span>`
           : html``}
       </label>
-   `;
+    `;
   }
 
   handleClick(originalEvent) {
