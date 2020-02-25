@@ -1,6 +1,7 @@
 import { LitElement, html, css } from "lit-element";
 import "./mv-toggle.js";
 import "mv-font-awesome";
+import "mv-container";
 
 export class MvToggleDemo extends LitElement {
   static get properties() {
@@ -24,7 +25,6 @@ export class MvToggleDemo extends LitElement {
       .container {
         text-align: center;
         width: 100%;
-        margin-top: 100px;
       }
       
       .toggle-item {
@@ -73,6 +73,10 @@ export class MvToggleDemo extends LitElement {
         display: flex;
         justify-content: flex-start;
       }
+      
+      mv-container {
+        --mv-container-min-width: 650px;
+      }  
    `;
   }
 
@@ -87,95 +91,100 @@ export class MvToggleDemo extends LitElement {
   }
 
   render() {
+    const containerTheme = this.open ? "dark" : "light";
+    const textColor = `color: ${this.open ? "#FFFFFF" : ""}`;
+    const iconColor = `color: ${this.open ? "yellow" : ""}`;
     return html`
       <div class="theme">
-        <mv-fa icon="lightbulb" style="color: ${this.open ? "yellow" : ""}" @click=${this.toggleLightBulb}></mv-fa>
+        <mv-fa icon="lightbulb" style="${iconColor}" @click=${this.toggleLightBulb}></mv-fa>
       </div>
-      <div class="container">
-        <div class="toggle-item">
-          <mv-toggle
-            size="large"
-            .theme="${this.theme}"
-          ></mv-toggle>
-          <h3>Large</h3>
+      <mv-container .theme="${containerTheme}" style="${textColor}">
+        <div class="container">
+          <div class="toggle-item">
+            <mv-toggle
+              size="large"
+              .theme="${this.theme}"
+            ></mv-toggle>
+            <h3>Large</h3>
+          </div>
+          
+          <div class="toggle-item">
+            <mv-toggle
+              ?checked="${true}"
+              size="medium"
+              .theme="${this.theme}"
+            ></mv-toggle>
+            <h3>Medium</h3>
+          </div>
+          
+          <div class="toggle-item">
+            <mv-toggle
+              ?checked="${false}"
+              size="small"
+              .theme="${this.theme}"
+            ></mv-toggle>
+            <h3>Small</h3>
+          </div>
+          
+          <div class="toggle-item">
+            <mv-toggle
+              ?checked="${false}"
+              size="tiny"
+              .theme="${this.theme}"
+            ></mv-toggle>
+            <h3>Tiny</h3>
+          </div>
+          
+          <div class="toggle-item">
+            <mv-toggle
+              ?checked="${false}"
+              ?disabled="${this.disabled}"
+              size="small"
+            ></mv-toggle>
+            <h3>Disable</h3>
+          </div>
+          
+          <div class="toggle-item">
+            <mv-toggle
+              ?checked="${false}"
+              size="small"
+              .label="${this.label}"
+              .theme="${this.theme}"
+            ></mv-toggle>
+            <h3>Toggle with label</h3>
+          </div>
         </div>
         
-        <div class="toggle-item">
-          <mv-toggle
-            ?checked="${true}"
-            size="medium"
-            .theme="${this.theme}"
-          ></mv-toggle>
-          <h3>Medium</h3>
+        <div class="container">
+          <div class="toggle-item">
+            <mv-toggle
+              class="custom-color"
+              size="large"
+            ></mv-toggle>
+            <h3>Custom color</h3>
+          </div>
+          
+          <div class="toggle-item">
+            <mv-toggle
+              class="custom-size"
+              .theme="${this.theme}"
+            ></mv-toggle>
+            <h3>Custom size</h3>
+          </div>
         </div>
         
-        <div class="toggle-item">
-          <mv-toggle
-            ?checked="${false}"
-            size="small"
-            .theme="${this.theme}"
-          ></mv-toggle>
-          <h3>Small</h3>
+        <div class="container-demo">
+           <mv-toggle
+             .value="${{ isChecked: !this.checked }}"
+             .checked="${!!this.checked}"
+             @click-toggle="${this.handleClickToggle}"
+             .label="${this.label}"
+             size="large"
+             .theme="${this.theme}"
+           ></mv-toggle>
+           <div class="value${this.checked ? " checked" : ""}">${this.value}</div>
         </div>
-        
-        <div class="toggle-item">
-          <mv-toggle
-            ?checked="${false}"
-            size="tiny"
-            .theme="${this.theme}"
-          ></mv-toggle>
-          <h3>Tiny</h3>
-        </div>
-        
-        <div class="toggle-item">
-          <mv-toggle
-            ?checked="${false}"
-            ?disabled="${this.disabled}"
-            size="small"
-          ></mv-toggle>
-          <h3>Disable</h3>
-        </div>
-        
-        <div class="toggle-item">
-          <mv-toggle
-            ?checked="${false}"
-            size="small"
-            .label="${this.label}"
-            .theme="${this.theme}"
-          ></mv-toggle>
-          <h3>Toggle with label</h3>
-        </div>
-      </div>
-      
-      <div class="container">
-        <div class="toggle-item">
-          <mv-toggle
-            class="custom-color"
-            size="large"
-          ></mv-toggle>
-          <h3>Custom color</h3>
-        </div>
-        
-        <div class="toggle-item">
-          <mv-toggle
-            class="custom-size"
-            .theme="${this.theme}"
-          ></mv-toggle>
-          <h3>Custom size</h3>
-        </div>
-      </div>
-      
-      <div class="container-demo">
-         <mv-toggle
-           .value="${{ isChecked: !this.checked }}"
-           .checked="${!!this.checked}"
-           @click-toggle="${this.handleClickToggle}"
-           .label="${this.label}"
-           size="large"
-           .theme="${this.theme}"
-         ></mv-toggle>
-         <div class="value${this.checked ? " checked" : ""}">${this.value}</div>
-      </div>
+      </mv-container>
     `;
   }
 
