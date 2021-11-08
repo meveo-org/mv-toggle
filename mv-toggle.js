@@ -3,14 +3,14 @@ import { LitElement, html, css } from "lit-element";
 export class MvToggle extends LitElement {
   static get properties() {
     return {
-      checked: { type: Boolean, attribute: true },
-      disabled: { type: Boolean, attribute: true },
+      checked: { type: Boolean, attribute: true, reflect: true, state: true },
+      disabled: { type: Boolean, attribute: true, reflect: true},
       label: { type: String, attribute: true },
 
       //  valid size values are: "large", "medium", "small", "tiny"
       //  default: "large"
       size: { type: String, attribute: true },
-      value: { type: Object, attribute: true },
+      value: { type: Object, attribute: true, reflect: true },
 
       //  valid theme values are: "light", "dark"
       //    default: "dark"
@@ -207,8 +207,8 @@ export class MvToggle extends LitElement {
           <input
             type="checkbox"
             @click="${handleClick}"
-            ?disabled="${this.disabled}"
-            ?checked="${this.checked}"
+            .disabled="${this.disabled}"
+            .checked="${this.checked}"
           />
           <span class="slider round"></span>
         </span>
