@@ -1,0 +1,22 @@
+{
+  "name": "@meveo-org/mv-toggle",
+  "version": "1.0.0",
+  "description": "MvToggle is a Meveo component (based on lit-element) that renders a toggle input.",
+  "main": "mv-toggle.js",
+  "scripts": {
+    "serve": "es-dev-server --node-resolve --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meveo-org/mv-toggle.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/meveo-org/mv-toggle/issues"
+  },
+  "homepage": "https://github.com/meveo-org/mv-toggle#readme",
+  "devDependencies": {
+    "es-dev-server": "^1.46.1"
+  }
+}
