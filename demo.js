@@ -1,6 +1,6 @@
 import { LitElement, html, css } from "lit-element";
 import "./mv-toggle.js";
-import "mv-container";
+import "@meveo-org/mv-container";
 
 export class MvToggleDemo extends LitElement {
   static get properties() {
